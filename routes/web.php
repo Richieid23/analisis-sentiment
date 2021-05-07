@@ -5,6 +5,7 @@ use App\Http\Controllers\DatasetController;
 use App\Http\Controllers\PembobotanController;
 use App\Http\Controllers\PreprocessingController;
 use App\Http\Controllers\BobotTweetController;
+use App\Http\Controllers\CrawlingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::get('/', function () {
 
 Route::get('/dataset', [DatasetController::class, 'index'])->name('dataset');
 Route::post('/dataset/import-excel', [DatasetController::class, 'import_excel'])->name('import');
+
+Route::get('/crawling', [CrawlingController::class, 'index'])->name('crawling');
+Route::post('/crawling/process', [CrawlingController::class, 'crawling'])->name('crawling.process');
 
 Route::get('/preprocessing', [PreprocessingController::class, 'index'])->name('preprocessing');
 Route::post('/preprocessing/process', [PreprocessingController::class, 'preprocessing'])->name('preprocessing.process');

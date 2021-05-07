@@ -20,7 +20,7 @@
         <div class="row">
             <form method="post" action="{{ route('bobottweet.process') }}" enctype="multipart/form-data">
 			{{ csrf_field() }}
-                <button type="submit" class="btn btn-primary">Process TF</button>
+                <button type="submit" class="btn btn-primary">Process Bobot</button>
             </form>
         </div> <br>
 
