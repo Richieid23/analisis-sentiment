@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Pembobotan;
 use App\Models\BobotTweet;
-use Illuminate\Http\Request;
 
 class BobotTweetController extends Controller
 {
@@ -16,7 +16,7 @@ class BobotTweetController extends Controller
     public function pembobotan()
     {
         BobotTweet::truncate();
-        hitung_bobotdoc();
+        Pembobotan::hitung_bobotdoc();
 
         return redirect()->route('bobottweet')->with('status', 'Data Successfully Processing');
     }

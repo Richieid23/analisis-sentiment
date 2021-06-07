@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Pembobotan;
 use App\Models\Bobot;
 use App\Models\Preprocessing;
-use Illuminate\Support\Facades\DB;
 
 class PembobotanController extends Controller
 {
@@ -20,7 +20,7 @@ class PembobotanController extends Controller
         $data = Preprocessing::all();
 
         foreach ($data as $tweets) {
-            hitung_tf($tweets);
+            Pembobotan::hitung_tf($tweets);
         }
 
         return redirect()->route('pembobotan')->with('status', 'Data Successfully Processing');
@@ -28,7 +28,7 @@ class PembobotanController extends Controller
 
     public function tfidf()
     {
-        hitung_tfidf();
+        Pembobotan::hitung_tfidf();
 
         return redirect()->route('pembobotan')->with('status', 'Data Successfully Processing');
     }

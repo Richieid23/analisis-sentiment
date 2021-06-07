@@ -17,15 +17,16 @@
             </div>
         @endif
 
-        <div class="row">
+        <div class="row mr-2">
             <form method="post" action="{{ route('pembobotan.process') }}" enctype="multipart/form-data">
 			{{ csrf_field() }}
-                <button type="submit" class="btn btn-primary">Process TF</button>
+                <button type="submit" class="btn btn-primary mr-5">Process TF</button>
             </form>
             <form method="post" action="{{ route('pembobotan.tfidf') }}" enctype="multipart/form-data">
 			{{ csrf_field() }}
-                <button type="submit" class="btn btn-success">Process TF-IDF</button>
+                <button type="submit" class="btn btn-primary">Process TF-IDF</button>
         </form>
+        {{-- <a href="{{ route('bobottweet') }}" class="btn btn-success">Pembobotan Tweet</a> --}}
         </div> <br>
 
 		<table class='table table-bordered table-striped table-hover'>

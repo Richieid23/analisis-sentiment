@@ -41,6 +41,22 @@ class PreprocessingController extends Controller
 
             $tweet = $stemmer->stem($tweet);
 
+            $tweet = cleansing($tweet);
+
+            foreach (Alay::all() as $kata) {
+                $tweet = preg_replace('/\b(' . $kata->kata_alay . ')\b/m', $kata->kata_dasar, $tweet);
+            }
+
+            $stoplist = array();
+            foreach (Stopword::all() as $word) {
+                $stoplist[] = $word->kata;
+            }
+            $tweet = preg_replace('/\b(' . implode('|', $stoplist) . ')\b/', '', $tweet);
+
+            $tweet = convert_negation($tweet);
+
+            $tweet = $stemmer->stem($tweet);
+
             $tweet = stripcslashes($tweet);
             $tweet = trim($tweet);
             $tweet = explode(' ', $tweet);

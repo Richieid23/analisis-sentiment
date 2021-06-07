@@ -20,7 +20,7 @@
          <div class="row">
             <form method="post" action="{{ route('preprocessing.process') }}" enctype="multipart/form-data">
 			{{ csrf_field() }}
-                <button type="submit" class="btn btn-primary">Process</button>
+                <button type="submit" class="btn btn-primary mr-5">Process</button>
             </form>
             <a href="{{ route('pembobotan') }}" class="btn btn-success">Pembobotan</a>
         </div> <br>

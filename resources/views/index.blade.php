@@ -70,7 +70,39 @@
 
 <div class="tab-content">
     <div class="tab-pane tabs-animation fade show active" id="tab-content-1" role="tabpanel">
+        @if(session('status'))
+            <div class="alert alert-success">
+                {{session('status')}}
+            </div>
+        @endif
 
+         <div class="row">
+            <form method="post" action="{{ route('preprocessing.process') }}" enctype="multipart/form-data">
+			{{ csrf_field() }}
+                <button type="submit" class="btn btn-primary mr-5">Process</button>
+            </form>
+            <a href="{{ route('pembobotan') }}" class="btn btn-success">Pembobotan</a>
+        </div> <br>
+
+		<table class='table table-striped table-hover'>
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Tweet</th>
+                    <th>Results</th>
+				</tr>
+			</thead>
+			<tbody>
+				@php $i=1 @endphp
+				@foreach($data as $s)
+				<tr>
+					<td>{{ $i++ }}</td>
+					<td>{{$s->tweets}}</td>
+                    <td>{{$s->results}}</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
     </div>
     <div class="tab-pane tabs-animation fade" id="tab-content-2" role="tabpanel">
 
