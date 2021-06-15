@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Dataset;
 use Illuminate\Http\Request;
 use App\Imports\DatasetImport;
+use App\Models\Bobot;
+use App\Models\Preprocessing;
+use App\Models\Sentiment;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DatasetController extends Controller
@@ -18,7 +21,11 @@ class DatasetController extends Controller
 
     public function import_dataset(Request $request)
     {
+
         Dataset::truncate();
+        Preprocessing::truncate();
+        Bobot::truncate();
+        Sentiment::truncate();
         // validasi
         $this->validate($request, [
             'file' => 'required|mimes:csv,xls,xlsx'

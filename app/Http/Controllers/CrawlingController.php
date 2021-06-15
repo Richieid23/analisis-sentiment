@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bobot;
 use Atymic\Twitter\Facade\Twitter;
 use Illuminate\Http\Request;
 use App\Models\Dataset;
+use App\Models\Preprocessing;
+use App\Models\Sentiment;
 
 class CrawlingController extends Controller
 {
@@ -17,6 +20,9 @@ class CrawlingController extends Controller
     public function crawling(Request $request)
     {
         Dataset::truncate();
+        Preprocessing::truncate();
+        Bobot::truncate();
+        Sentiment::truncate();
         $query = $request->get('query');
         $result = Twitter::searchRecent($query, ['max_results' => 100]);
         $result = json_decode($result, true);

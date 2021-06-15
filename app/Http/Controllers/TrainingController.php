@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Session;
 use App\Helper\Svm;
-
+use App\Models\BobotTrain;
+use App\Models\Preprocessing;
+use App\Models\Sentiment;
 
 class TrainingController extends Controller
 {
@@ -22,6 +24,10 @@ class TrainingController extends Controller
     public function import_training(Request $request)
     {
         Training::truncate();
+        Preprocessing::truncate();
+        BobotTrain::truncate();
+        Sentiment::truncate();
+
         // validasi
         $this->validate($request, [
             'file' => 'required|mimes:csv,xls,xlsx'
@@ -44,58 +50,5 @@ class TrainingController extends Controller
 
         // alihkan halaman kembali
         return redirect()->route('train');
-    }
-
-    public function train()
-    {
-        $bobot = Bobot::all();
-        $trains = Training::all();
-        $data = array();
-        $labels = array();
-        foreach ($trains as $data_train) {
-            $id = $data_train->id;
-            foreach ($bobot as $value) {
-                if ($value->tweet_id == $id) {
-                    $data[$id - 1][] = $value->tfidf;
-                }
-            }
-            $labels[] = $data_train->label;
-        }
-
-        $ndata = count($data);
-        $datamax = 0;
-        for ($i = 0; $i < $ndata; $i++) {
-            $nDataIns = count($data[$i]);
-            if ($nDataIns > $datamax) {
-                $datamax = $nDataIns;
-            } else {
-                $datamax = $datamax;
-            }
-        }
-
-        for ($i = 0; $i < $ndata; $i++) {
-            $nDataIns = count($data[$i]);
-            if ($nDataIns < $datamax) {
-                for ($j = $nDataIns; $j < $datamax; $j++) {
-                    $data[$i][$j] = 0;
-                }
-            }
-        }
-
-        // $data = [[0, 0], [0.5, 0.5], [0.7, 0.7], [1, 1]];
-        // $labels = [-1, -1, 1, 1];
-
-        global $svm;
-        $svm->train($data, $labels);
-
-        // echo
-        // '<pre>';
-        // print_r($predict);
-        // echo '</pre>';
-
-        // echo
-        // '<pre>';
-        // print_r($labels);
-        // echo '</pre>';
     }
 }
