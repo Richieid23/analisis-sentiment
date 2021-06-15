@@ -8,7 +8,7 @@
 
 	<div class="container">
 		<center>
-			<h4>Import Dataset</h4>
+			<h4>Import Training Data</h4>
 		</center> <br><br>
 
 		{{-- notifikasi form validasi --}}
@@ -34,7 +34,7 @@
 		<!-- Import Excel -->
 		<div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
-				<form method="post" action="{{ route('import.dataset') }}" enctype="multipart/form-data">
+				<form method="post" action="{{ route('import.training') }}" enctype="multipart/form-data">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
@@ -63,7 +63,7 @@
 				<tr>
 					<th>No</th>
 					<th>Tweet</th>
-                    {{-- <th>tanggal</th> --}}
+                    <th>label</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -72,7 +72,7 @@
 				<tr>
 					<td>{{ $i++ }}</td>
 					<td>{{$s->tweets}}</td>
-                    {{-- <td>{{ $s->created_at }}</td> --}}
+                    <td>{{ $s->label }}</td>
 				</tr>
 				@endforeach
 			</tbody>

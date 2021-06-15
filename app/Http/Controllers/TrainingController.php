@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Session;
-use App\Models\Dataset;
+use App\Imports\TrainImport;
+use App\Models\Training;
 use Illuminate\Http\Request;
-use App\Imports\DatasetImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Session;
 
-class DatasetController extends Controller
+
+class TrainingController extends Controller
 {
     public function index()
     {
-        $dataset = Dataset::all();
-        return view('dataset', ['data' => $dataset]);
+        $dataset = Training::all();
+        return view('train', ['data' => $dataset]);
     }
 
-    public function import_dataset(Request $request)
+    public function import_training(Request $request)
     {
-        Dataset::truncate();
+        Training::truncate();
         // validasi
         $this->validate($request, [
             'file' => 'required|mimes:csv,xls,xlsx'
@@ -34,12 +35,12 @@ class DatasetController extends Controller
         $file->move('file_dataset', $nama_file);
 
         // import data
-        Excel::import(new DatasetImport, public_path('/file_dataset/' . $nama_file));
+        Excel::import(new TrainImport, public_path('/file_dataset/' . $nama_file));
 
         // notifikasi dengan session
         Session::flash('sukses', 'Data Tweets Berhasil Diimport!');
 
         // alihkan halaman kembali
-        return redirect()->route('dataset');
+        return redirect()->route('train');
     }
 }
