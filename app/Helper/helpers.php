@@ -1,11 +1,7 @@
 <?php
 
-use App\Models\Abusive;
-use App\Models\Kamus;
-use Illuminate\Support\Facades\DB;
+use App\Helper\Svm;
 use Illuminate\Support\Str;
-use App\Models\Bobot;
-use App\Models\BobotTweet;
 use Illuminate\Support\Facades\Http;
 
 function scraping()

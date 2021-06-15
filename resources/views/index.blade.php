@@ -84,7 +84,7 @@
             <a href="{{ route('pembobotan') }}" class="btn btn-success">Pembobotan</a>
         </div> <br>
 
-		<table class='table table-striped table-hover'>
+		<table class='table table-bordered table-striped table-hover'>
 			<thead>
 				<tr>
 					<th>No</th>

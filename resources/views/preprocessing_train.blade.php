@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Classification</title>
+	<title>Text Preprocessing</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
 	<div class="container">
 		<center>
-			<h4>Classification</h4>
+			<h4>Text Preprocessing</h4>
 		</center>
 
 		@if(session('status'))
@@ -18,10 +18,11 @@
         @endif
 
          <div class="row">
-            <form method="post" action="{{ route('svm.process') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('preprocessing.train.process') }}" enctype="multipart/form-data">
 			{{ csrf_field() }}
                 <button type="submit" class="btn btn-primary mr-5">Process</button>
             </form>
+            <a href="{{ route('pembobotan.training') }}" class="btn btn-success">Pembobotan</a>
         </div> <br>
 
 		<table class='table table-bordered table-striped table-hover'>
@@ -29,7 +30,7 @@
 				<tr>
 					<th>No</th>
 					<th>Tweet</th>
-                    <th>Sentiment</th>
+                    <th>Results</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,7 +39,7 @@
 				<tr>
 					<td>{{ $i++ }}</td>
 					<td>{{$s->tweets}}</td>
-                    <td>{{$s->sentiment == 1 ? 'Cyberbullying' : 'Non-Cyberbullying'}}</td>
+                    <td>{{$s->results}}</td>
 				</tr>
 				@endforeach
 			</tbody>

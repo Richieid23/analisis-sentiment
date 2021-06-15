@@ -26,7 +26,7 @@
 			{{ csrf_field() }}
                 <button type="submit" class="btn btn-primary">Process TF-IDF</button>
         </form>
-        {{-- <a href="{{ route('bobottweet') }}" class="btn btn-success">Pembobotan Tweet</a> --}}
+        <a href="{{ route('svm') }}" class="btn btn-success">SVM</a>
         </div> <br>
 
 		<table class='table table-bordered table-striped table-hover'>

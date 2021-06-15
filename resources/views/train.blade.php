@@ -28,7 +28,7 @@
 
         <div class="row">
             <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#importExcel">Import Dataset</button>
-            <a href="{{ route('preprocessing') }}" class="btn btn-success">Preprocessing</a>
+            <a href="{{ route('preprocessing.train') }}" class="btn btn-success">Preprocessing</a>
         </div> <br>
 
 		<!-- Import Excel -->
@@ -58,7 +58,7 @@
 			</div>
 		</div>
 
-		<table class='table table-striped table-hover'>
+		<table class='table table-bordered table-striped table-hover'>
 			<thead>
 				<tr>
 					<th>No</th>
@@ -72,7 +72,7 @@
 				<tr>
 					<td>{{ $i++ }}</td>
 					<td>{{$s->tweets}}</td>
-                    <td>{{ $s->label }}</td>
+                    <td>{{ $s->label == 1 ? 'Cyberbullying' : 'Non-Cyberbullying' }}</td>
 				</tr>
 				@endforeach
 			</tbody>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSentimentsTable extends Migration
+class CreateBobotTrainsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateSentimentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sentiments', function (Blueprint $table) {
+        Schema::create('bobot_trains', function (Blueprint $table) {
             $table->id();
-            $table->text('tweets');
-            $table->integer('sentiment');
+            $table->integer('tweet_id');
+            $table->string('term');
+            $table->integer('tf');
+            $table->float('df');
+            $table->float('tfidf');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateSentimentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sentiments');
+        Schema::dropIfExists('bobot_trains');
     }
 }

@@ -6,17 +6,12 @@ use App\Models\Alay;
 use App\Models\Dataset;
 use App\Models\Preprocessing;
 use App\Models\Stopword;
+use App\Models\Training;
 use Sastrawi\Stemmer\StemmerFactory;
 
-class PreprocessingController extends Controller
+class PreprocessingTrainController extends Controller
 {
     public function index()
-    {
-        $data = Preprocessing::all();
-        return view('preprocessing', ['data' => $data]);
-    }
-
-    public function index_train()
     {
         $data = Preprocessing::all();
         return view('preprocessing_train', ['data' => $data]);
@@ -28,7 +23,7 @@ class PreprocessingController extends Controller
         $stemmerFactory = new StemmerFactory();
         $stemmer = $stemmerFactory->createStemmer();
 
-        foreach (Dataset::all() as $tweets) {
+        foreach (Training::all() as $tweets) {
             $tweet = $tweets->tweets;
             $tweet = casefolding($tweet);
             $tweet = cleansing($tweet);
@@ -72,6 +67,6 @@ class PreprocessingController extends Controller
             $preprocessing->results = implode(' | ', $tweet);
             $preprocessing->save();
         }
-        return redirect()->route('preprocessing')->with('status', 'Data Successfully Processing');
+        return redirect()->route('preprocessing.train')->with('status', 'Data Successfully Processing');
     }
 }

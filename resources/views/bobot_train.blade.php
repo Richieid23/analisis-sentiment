@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Classification</title>
+	<title>Pembobotan TF-IDF Data Train</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
 	<div class="container">
 		<center>
-			<h4>Classification</h4>
+			<h4>Pembobotan TF-IDF Data Train</h4>
 		</center>
 
 		@if(session('status'))
@@ -17,28 +17,42 @@
             </div>
         @endif
 
-         <div class="row">
-            <form method="post" action="{{ route('svm.process') }}" enctype="multipart/form-data">
+        <div class="row mr-2">
+            <form method="post" action="{{ route('pembobotan.training.process') }}" enctype="multipart/form-data">
 			{{ csrf_field() }}
-                <button type="submit" class="btn btn-primary mr-5">Process</button>
+                <button type="submit" class="btn btn-primary mr-5">Process TF</button>
             </form>
+            <form method="post" action="{{ route('pembobotan.training.tfidf') }}" enctype="multipart/form-data">
+			{{ csrf_field() }}
+                <button type="submit" class="btn btn-primary">Process TF-IDF</button>
+        </form>
+        <a href="{{ route('svm') }}" class="btn btn-success ml-5">SVM</a>
         </div> <br>
 
 		<table class='table table-bordered table-striped table-hover'>
 			<thead>
 				<tr>
 					<th>No</th>
-					<th>Tweet</th>
-                    <th>Sentiment</th>
+					<th>Tweet Id</th>
+                    <th>Term</th>
+                    <th>TF</th>
+                    <th>DF</th>
+                    <th>Bobot</th>
 				</tr>
 			</thead>
 			<tbody>
 				@php $i=1 @endphp
 				@foreach($data as $s)
+                {{-- @php
+                    $tweet = App\Models\Preprocessing::findOrFail($s->tweet_id);
+                @endphp --}}
 				<tr>
 					<td>{{ $i++ }}</td>
-					<td>{{$s->tweets}}</td>
-                    <td>{{$s->sentiment == 1 ? 'Cyberbullying' : 'Non-Cyberbullying'}}</td>
+                    <td>{{ $s->tweet_id }}</td>
+					<td>{{ $s->term }}</td>
+                    <td>{{ $s->tf }}</td>
+                    <td>{{ $s->df }}</td>
+                    <td>{{ $s->tfidf }}</td>
 				</tr>
 				@endforeach
 			</tbody>

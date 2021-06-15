@@ -22,6 +22,6 @@ class TrainImport implements ToModel
 
     public function batchSize(): int
     {
-        return 100;
+        return 200;
     }
 }
